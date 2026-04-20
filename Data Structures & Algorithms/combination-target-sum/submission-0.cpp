@@ -1,0 +1,23 @@
+class Solution {
+private:
+int n;
+    vector<vector<int>> ans;
+    void f(int idx,int sum,vector<int>& curr,vector<int>& arr) {
+        if(sum < 0) return;
+        if(idx == n) {
+            if(sum == 0) ans.push_back(curr);
+            return;
+        }
+        curr.push_back(arr[idx]);
+        f(idx,sum-arr[idx],curr,arr);
+        curr.pop_back();
+        f(idx+1,sum,curr,arr);
+    }
+public:
+    vector<vector<int>> combinationSum(vector<int>& arr, int k) {
+        n = arr.size();
+        vector<int> curr;
+        f(0,k,curr,arr);
+        return ans;
+    }
+};
